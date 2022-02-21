@@ -1,7 +1,7 @@
 ### Olá! 👋  Eu sou o Leonardo Cabral
 
 - 🔭 Atualmente trabalhando com VFP9
-- 🌱 Estudando back-end
+- 🌱 Estudando TS - React - Flutter - Machine Learning
 - 🤔 Precisando de ajuda com arquitetura de software
 - ⚡ Fato divertido: Pretendo morar em um motorhome!
 
