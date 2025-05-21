@@ -1,0 +1,47 @@
+pipeline {
+    agent FakeEc2 // Usa qualquer agente/dispositivo disponível
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Compilando o projeto...'
+                // Exemplo: sh 'npm install'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Executando testes...'
+                // Exemplo: sh 'npm test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Fazendo deploy...'
+                // Exemplo: sh './deploy.sh'
+                echo 'Deployed' > 'deploy.log'
+            }
+        }
+        // stage de pre prod
+        stage('Pre-Prod') {
+            steps {
+                echo 'Fazendo deploy em pre-prod...'
+                // Exemplo: sh './deploy-preprod.sh'
+                echo 'Deployed to Pre-Prod' > 'preprod.log'
+            }
+        }
+        // esperando aprove manual de qa
+        stage('QA Approval') {
+            steps {
+                input message: 'Aprovar deploy para produção?', ok: 'Aprovar'
+            }
+        }
+        // stage de prod
+        stage('Prod') {
+            steps {
+                echo 'Fazendo deploy em produção...'
+                // Exemplo: sh './deploy-prod.sh'
+                echo 'Deployed to Prod' > 'prod.log'
+            }
+        }
+    }
+}
