@@ -18,7 +18,7 @@ pipeline {
             steps {
                 echo 'Fazendo deploy...'
                 // Exemplo: sh './deploy.sh'
-                echo 'Deployed' > 'deploy.log'
+                sh 'echo Deployed > deploy.log'
             }
         }
         // stage de pre prod
@@ -26,7 +26,7 @@ pipeline {
             steps {
                 echo 'Fazendo deploy em pre-prod...'
                 // Exemplo: sh './deploy-preprod.sh'
-                echo 'Deployed to Pre-Prod' > 'preprod.log'
+                sh 'echo Deployed to Pre-Prod > preprod.log'
             }
         }
         // esperando aprove manual de qa
@@ -40,7 +40,7 @@ pipeline {
             steps {
                 echo 'Fazendo deploy em produção...'
                 // Exemplo: sh './deploy-prod.sh'
-                echo 'Deployed to Prod' > 'prod.log'
+                sh 'echo Deployed to Prod > prod.log'
             }
         }
     }
