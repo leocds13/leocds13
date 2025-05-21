@@ -1,5 +1,5 @@
 pipeline {
-    agent FakeEc2 // Usa qualquer agente/dispositivo disponível
+    agent { label 'FakeEc2' }
 
     stages {
         stage('Build') {
