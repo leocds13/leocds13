@@ -16,6 +16,9 @@ pipeline {
         }
         // stage de pre prod
         stage('Pre-Prod') {
+            agent {
+                label 'FakeEc2'
+            }
             steps {
                 echo 'Fazendo deploy em pre-prod...'
                 // copy the repository to pre-prod (path: /var/www/preprod)
@@ -32,6 +35,9 @@ pipeline {
         }
         // stage de prod
         stage('Prod') {
+            agent {
+                label 'FakeEc2'
+            }
             steps {
                 echo 'Fazendo deploy em produção...'
                 sh 'rm -rf /usr/share/nginx/html/prod/*'
