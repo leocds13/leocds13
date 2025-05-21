@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'FakeEc2' }
+    agent any
 
     stages {
         stage('Build') {
@@ -14,18 +14,13 @@ pipeline {
                 // Exemplo: sh 'npm test'
             }
         }
-        stage('Deploy') {
-            steps {
-                echo 'Fazendo deploy...'
-                // Exemplo: sh './deploy.sh'
-                sh 'echo Deployed > deploy.log'
-            }
-        }
         // stage de pre prod
         stage('Pre-Prod') {
             steps {
                 echo 'Fazendo deploy em pre-prod...'
-                // Exemplo: sh './deploy-preprod.sh'
+                // copy the repository to pre-prod (path: /var/www/preprod)
+                sh 'rm -rf /usr/share/nginx/html/preprod/*'
+                sh 'cp -r * /usr/share/nginx/html/preprod'
                 sh 'echo Deployed to Pre-Prod > preprod.log'
             }
         }
@@ -39,7 +34,8 @@ pipeline {
         stage('Prod') {
             steps {
                 echo 'Fazendo deploy em produção...'
-                // Exemplo: sh './deploy-prod.sh'
+                sh 'rm -rf /usr/share/nginx/html/prod/*'
+                sh 'cp -r * /usr/share/nginx/html/prod'
                 sh 'echo Deployed to Prod > prod.log'
             }
         }
